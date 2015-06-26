@@ -35,9 +35,13 @@ defmodule Portal do
   Pushes data to the right in the given `portal`.
   """
   def push_right(portal) do
-    case Portal.Door.pop(portal.left) do
+    push(portal, portal.left, portal.right)
+  end
+
+  def push(portal, from, to) do
+    case Portal.Door.pop(from) do
       :error   -> :ok
-      {:ok, h} -> Portal.Door.push(portal.right, h)
+      {:ok, h} -> Portal.Door.push(to, h)
     end
 
     portal
